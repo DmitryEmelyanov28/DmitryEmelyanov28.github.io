@@ -6,79 +6,120 @@
     <title>CortexLab - AI Automation Solutions</title>
     <script src="https://cdn.tailwindcss.com"></script>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
-    <style>
-        @import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&display=swap');
-
-        :root {
-            --neon-blue: #00f0ff;
-            --neon-purple: #b400ff;
-            --dark-bg: #0a0a0f;
+    <script>
+        tailwind.config = {
+            darkMode: 'class',x
+            theme: {
+                extend: {
+                    colors: {
+                        primary: {
+                            50: '#f0f9ff',
+                            100: '#e0f2fe',
+                            200: '#bae6fd',
+                            300: '#7dd3fc',
+                            400: '#38bdf8',
+                            500: '#0ea5e9',
+                            600: '#0284c7',
+                            700: '#0369a1',
+                            800: '#075985',
+                            900: '#0c4a6e',
+                        },
+                        secondary: {
+                            50: '#faf5ff',
+                            100: '#f3e8ff',
+                            200: '#e9d5ff',
+                            300: '#d8b4fe',
+                            400: '#c084fc',
+                            500: '#a855f7',
+                            600: '#9333ea',
+                            700: '#7e22ce',
+                            800: '#6b21a8',
+                            900: '#581c87',
+                        },
+                        dark: {
+                            900: '#0a0a0a',
+                            800: '#1a1a1a',
+                            700: '#2a2a2a',
+                            600: '#3a3a3a',
+                            500: '#4a4a4a',
+                        }
+                    },
+                    fontFamily: {
+                        sans: ['Inter', 'sans-serif'],
+                        mono: ['"Fira Code"', 'monospace'],
+                    },
+                    animation: {
+                        'float': 'float 6s ease-in-out infinite',
+                        'pulse-slow': 'pulse 5s cubic-bezier(0.4, 0, 0.6, 1) infinite',
+                        'neon-glow': 'neon-glow 2s ease-in-out infinite alternate',
+                    },
+                    keyframes: {
+                        float: {
+                            '0%, 100%': { transform: 'translateY(0)' },
+                            '50%': { transform: 'translateY(-20px)' },
+                        },
+                        'neon-glow': {
+                            'from': {
+                                'text-shadow': '0 0 5px #fff, 0 0 10px #fff, 0 0 15px #38bdf8, 0 0 20px #38bdf8, 0 0 25px #38bdf8, 0 0 30px #38bdf8, 0 0 35px #38bdf8',
+                            },
+                            'to': {
+                                'text-shadow': '0 0 10px #fff, 0 0 15px #7dd3fc, 0 0 20px #7dd3fc, 0 0 25px #7dd3fc, 0 0 30px #7dd3fc, 0 0 35px #7dd3fc, 0 0 40px #7dd3fc',
+                            }
+                        }
+                    }
+                }
+            }
         }
+    </script>
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap');
 
         body {
             font-family: 'Inter', sans-serif;
-            background-color: var(--dark-bg);
-            color: white;
-            overflow-x: hidden;
-        }
-
-        .neon-text-blue {
-            color: var(--neon-blue);
-            text-shadow: 0 0 5px rgba(0, 240, 255, 0.5);
-        }
-
-        .neon-text-purple {
-            color: var(--neon-purple);
-            text-shadow: 0 0 5px rgba(180, 0, 255, 0.5);
-        }
-
-        .neon-border-blue {
-            border: 1px solid var(--neon-blue);
-            box-shadow: 0 0 10px rgba(0, 240, 255, 0.3);
-        }
-
-        .neon-border-purple {
-            border: 1px solid var(--neon-purple);
-            box-shadow: 0 0 10px rgba(180, 0, 255, 0.3);
-        }
-
-        .gradient-bg {
-            background: linear-gradient(135deg, rgba(0, 240, 255, 0.1) 0%, rgba(180, 0, 255, 0.1) 100%);
+            background-color: #0a0a0a;
+            color: #f8fafc;
+            scroll-behavior: smooth;
         }
 
         .circuit-pattern {
-            background-image:
-                radial-gradient(circle at 1px 1px, rgba(0, 240, 255, 0.2) 1px, transparent 0);
-            background-size: 20px 20px;
+            background-image: radial-gradient(circle, rgba(56, 189, 248, 0.1) 1px, transparent 1px);
+            background-size: 30px 30px;
+        }
+
+        .neon-border {
+            position: relative;
+            border: 2px solid transparent;
+        }
+
+        .neon-border::after {
+            content: '';
+            position: absolute;
+            top: -2px;
+            left: -2px;
+            right: -2px;
+            bottom: -2px;
+            border: 2px solid transparent;
+            border-image: linear-gradient(45deg, #38bdf8, #a855f7) 1;
+            animation: neon-glow 2s ease-in-out infinite alternate;
+            z-index: -1;
         }
 
         .service-card {
             transition: all 0.3s ease;
-            transform-style: preserve-3d;
+            background: linear-gradient(145deg, rgba(26, 26, 26, 0.8), rgba(42, 42, 42, 0.8));
+            backdrop-filter: blur(10px);
         }
 
         .service-card:hover {
-            transform: translateY(-10px) scale(1.02);
-            box-shadow: 0 10px 20px rgba(0, 240, 255, 0.2);
+            transform: translateY(-10px);
+            box-shadow: 0 10px 25px rgba(56, 189, 248, 0.3);
         }
 
-        .fade-in {
-            animation: fadeIn 0.5s ease-in;
-        }
-
-        @keyframes fadeIn {
-            from { opacity: 0; transform: translateY(20px); }
-            to { opacity: 1; transform: translateY(0); }
-        }
-
-        .pulse {
-            animation: pulse 2s infinite;
-        }
-
-        @keyframes pulse {
-            0% { box-shadow: 0 0 0 0 rgba(0, 240, 255, 0.4); }
-            70% { box-shadow: 0 0 0 10px rgba(0, 240, 255, 0); }
-            100% { box-shadow: 0 0 0 0 rgba(0, 240, 255, 0); }
+        .gradient-text {
+            background-clip: text;
+            -webkit-background-clip: text;
+            color: transparent;
+            background-image: linear-gradient(90deg, #38bdf8, #a855f7);
         }
 
         .scroll-indicator {
@@ -86,556 +127,652 @@
         }
 
         @keyframes bounce {
-            0%, 20%, 50%, 80%, 100% { transform: translateY(0); }
-            40% { transform: translateY(-20px); }
-            60% { transform: translateY(-10px); }
+            0%, 20%, 50%, 80%, 100% {transform: translateY(0);}
+            40% {transform: translateY(-20px);}
+            60% {transform: translateY(-10px);}
         }
 
-        /* Custom scrollbar */
-        ::-webkit-scrollbar {
-            width: 8px;
+        .fade-in {
+            opacity: 0;
+            transition: opacity 0.6s ease-in;
         }
 
-        ::-webkit-scrollbar-track {
-            background: #111;
+        .fade-in.visible {
+            opacity: 1;
         }
 
-        ::-webkit-scrollbar-thumb {
-            background: linear-gradient(var(--neon-blue), var(--neon-purple));
-            border-radius: 10px;
+        .language-toggle {
+            transition: all 0.3s ease;
+        }
+
+        .language-toggle:hover {
+            transform: scale(1.1);
+        }
+
+        .active-language {
+            color: #38bdf8;
+            text-shadow: 0 0 5px rgba(56, 189, 248, 0.5);
         }
     </style>
 </head>
 <body class="circuit-pattern">
     <!-- Language Toggle -->
-    <div class="fixed top-4 right-4 z-50">
-        <div class="flex space-x-2">
-            <button id="lang-ru" class="px-3 py-1 rounded-full bg-gradient-to-r from-purple-500 to-blue-500 text-white font-medium shadow-lg hover:shadow-xl transition-all duration-300">
-                🇷🇺 Русский
-            </button>
-            <button id="lang-en" class="px-3 py-1 rounded-full bg-gray-700 text-gray-300 font-medium hover:bg-gray-600 transition-all duration-300">
-                🇬🇧 English
-            </button>
+    <div class="fixed top-4 right-4 z-50 flex items-center space-x-2">
+        <button id="lang-ru" class="language-toggle active-language text-lg">🇷🇺</button>
+        <span class="text-gray-400">|</span>
+        <button id="lang-en" class="language-toggle text-lg">🇬🇧</button>
+    </div>
+
+    <!-- Navigation -->
+    <nav class="fixed w-full z-40 bg-dark-900/80 backdrop-blur-md border-b border-dark-700">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="flex items-center justify-between h-16">
+                <div class="flex items-center">
+                    <div class="flex-shrink-0">
+                        <div class="flex items-center space-x-2">
+                            <div class="w-10 h-10 rounded-full bg-gradient-to-r from-primary-500 to-secondary-500 flex items-center justify-center">
+                                <img src="pictures/cortexLab (1).png" alt="Your image description" class="w-6 h-6">
+                            </div>
+                            <span class="text-xl font-bold bg-clip-text text-transparent bg-gradient-to-r from-primary-400 to-secondary-500">CortexLab</span>
+                        </div>
+                    </div>
+                </div>
+                <div class="hidden md:block">
+                    <div class="ml-10 flex items-baseline space-x-4">
+                        <a href="#about" class="text-gray-300 hover:text-primary-400 px-3 py-2 rounded-md text-sm font-medium transition-colors duration-300" data-i18n="nav.about">О нас</a>
+                        <a href="#services" class="text-gray-300 hover:text-primary-400 px-3 py-2 rounded-md text-sm font-medium transition-colors duration-300" data-i18n="nav.services">Услуги</a>
+                        <a href="#clients" class="text-gray-300 hover:text-primary-400 px-3 py-2 rounded-md text-sm font-medium transition-colors duration-300" data-i18n="nav.clients">Клиенты</a>
+                        <a href="#contact" class="text-gray-300 hover:text-primary-400 px-3 py-2 rounded-md text-sm font-medium transition-colors duration-300" data-i18n="nav.contact">Контакты</a>
+                    </div>
+                </div>
+                <div class="md:hidden">
+                    <button class="mobile-menu-button p-2 rounded-md text-gray-400 hover:text-white hover:bg-gray-700 focus:outline-none">
+                        <svg class="h-6 w-6" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16M4 18h16"></path>
+                        </svg>
+                    </button>
+                </div>
+            </div>
+        </div>
+    </nav>
+
+    <!-- Mobile Menu -->
+    <div class="mobile-menu hidden md:hidden fixed inset-0 z-30 bg-dark-900/95 backdrop-blur-lg pt-20">
+        <div class="px-2 pt-2 pb-3 space-y-1 sm:px-3 flex flex-col items-center">
+            <a href="#about" class="text-gray-300 hover:text-primary-400 block px-3 py-2 rounded-md text-base font-medium transition-colors duration-300" data-i18n="nav.about">О нас</a>
+            <a href="#services" class="text-gray-300 hover:text-primary-400 block px-3 py-2 rounded-md text-base font-medium transition-colors duration-300" data-i18n="nav.services">Услуги</a>
+            <a href="#clients" class="text-gray-300 hover:text-primary-400 block px-3 py-2 rounded-md text-base font-medium transition-colors duration-300" data-i18n="nav.clients">Клиенты</a>
+            <a href="#contact" class="text-gray-300 hover:text-primary-400 block px-3 py-2 rounded-md text-base font-medium transition-colors duration-300" data-i18n="nav.contact">Контакты</a>
         </div>
     </div>
 
     <!-- Hero Section -->
-    <section class="min-h-screen flex flex-col justify-center items-center text-center px-4 relative overflow-hidden">
-        <div class="absolute inset-0 overflow-hidden">
-            <div class="absolute top-0 left-0 w-full h-full opacity-20" style="background: radial-gradient(circle at center, var(--neon-blue) 0%, transparent 70%);"></div>
-            <div class="absolute top-0 right-0 w-full h-full opacity-20" style="background: radial-gradient(circle at center, var(--neon-purple) 0%, transparent 70%);"></div>
+    <section class="relative pt-32 pb-20 md:pt-40 md:pb-28 overflow-hidden">
+        <div class="absolute inset-0">
+            <div class="absolute inset-0 bg-gradient-to-br from-dark-900 via-dark-800 to-dark-900 opacity-90"></div>
+            <div class="absolute inset-0 opacity-20" style="background-image: url('data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHdpZHRoPSI1MCIgaGVpZ2h0PSI1MCIgdmlld0JveD0iMCAwIDUwIDUwIj48cGF0aCBkPSJNMjUgMTVMMTUgMjVMMjUgMzVMMzUgMjVMMjUgMTVaIiBzdHJva2U9InJnYmEoNTYsIDE4OSwgMjQ4LCAwLjEpIiBzdHJva2Utd2lkdGg9IjEiIGZpbGw9Im5vbmUiIC8+PC9zdmc+'); background-size: 50px 50px;"></div>
         </div>
-
-        <div class="relative z-10 max-w-4xl mx-auto fade-in">
-            <!-- Logo Placeholder - Replace with actual logo -->
-            <div class="flex justify-center mb-8">
-                <div class="w-32 h-32 rounded-full gradient-bg flex items-center justify-center pulse">
-                    <span class="text-4xl font-bold neon-text-blue">C</span>
-                    <span class="text-4xl font-bold neon-text-purple">L</span>
+        <div class="relative max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="flex flex-col md:flex-row items-center">
+                <div class="md:w-1/2 mb-12 md:mb-0">
+                    <h1 class="text-4xl md:text-6xl font-bold leading-tight mb-6" data-i18n="hero.title">Автоматизация с ИИ для вашего бизнеса</h1>
+                    <p class="text-xl text-gray-300 mb-8 max-w-lg" data-i18n="hero.subtitle">Оптимизируйте свои рабочие процессы с помощью наших интеллектуальных решений на базе искусственного интеллекта.</p>
+                    <div class="flex space-x-4">
+                        <a href="#services" class="px-8 py-3 bg-gradient-to-r from-primary-500 to-secondary-500 text-white rounded-lg font-medium hover:opacity-90 transition-all duration-300 transform hover:scale-105 shadow-lg" data-i18n="hero.cta">Наши услуги</a>
+                        <a href="#contact" class="px-8 py-3 border border-primary-500 text-primary-400 rounded-lg font-medium hover:bg-primary-500/10 transition-all duration-300" data-i18n="hero.contact">Связаться</a>
+                    </div>
+                </div>
+                <div class="md:w-1/2 flex justify-center">
+                    <div class="relative w-full max-w-md">
+                        <div class="absolute -top-10 -left-10 w-32 h-32 bg-primary-500 rounded-full filter blur-3xl opacity-20 animate-pulse"></div>
+                        <div class="absolute -bottom-10 -right-10 w-32 h-32 bg-secondary-500 rounded-full filter blur-3xl opacity-20 animate-pulse"></div>
+                        <div class="relative z-10 neon-border p-1 rounded-2xl bg-dark-800/50 backdrop-blur-sm">
+                            <div class="bg-dark-800 rounded-xl p-6">
+                                <div class="flex justify-between items-center mb-4">
+                                    <div class="flex items-center space-x-2">
+                                        <div class="w-3 h-3 rounded-full bg-red-500"></div>
+                                        <div class="w-3 h-3 rounded-full bg-yellow-500"></div>
+                                        <div class="w-3 h-3 rounded-full bg-green-500"></div>
+                                    </div>
+                                    <div class="text-xs text-gray-400">AI TERMINAL</div>
+                                </div>
+                                <div class="font-mono text-sm">
+                                    <div class="text-green-400 mb-2">$ cortexlab --init</div>
+                                    <div class="text-gray-400 mb-2">> Loading neural network modules...</div>
+                                    <div class="text-gray-400 mb-2">> Connecting to AI services...</div>
+                                    <div class="text-primary-400 mb-2">> System ready for automation</div>
+                                    <div class="text-secondary-400">> Welcome to CortexLab AI</div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
                 </div>
             </div>
-
-            <h1 class="text-5xl md:text-6xl font-bold mb-6" id="hero-title">
-                <span class="neon-text-blue">Автоматизация</span> с ИИ для вашего бизнеса
-            </h1>
-
-            <p class="text-xl md:text-2xl text-gray-300 mb-10 max-w-3xl mx-auto" id="hero-subtitle">
-                Оптимизируйте и ускорьте ваши цифровые процессы с помощью наших AI-решений
-            </p>
-
-            <div class="flex flex-wrap justify-center gap-4">
-                <a href="#services" class="px-8 py-3 rounded-full bg-gradient-to-r from-blue-500 to-purple-600 text-white font-semibold hover:from-blue-600 hover:to-purple-700 transition-all duration-300 shadow-lg hover:shadow-xl">
-                    Наши услуги
-                </a>
-                <a href="#about" class="px-8 py-3 rounded-full border border-gray-600 text-white font-semibold hover:bg-gray-800/50 hover:border-gray-500 transition-all duration-300">
-                    О нас
-                </a>
-            </div>
         </div>
-
-        <div class="absolute bottom-10 left-0 right-0 flex justify-center scroll-indicator">
-            <a href="#about" class="text-gray-400 hover:text-white transition-colors duration-300">
-                <i class="fas fa-chevron-down text-2xl animate-bounce"></i>
-            </a>
+        <div class="absolute bottom-10 left-1/2 transform -translate-x-1/2 scroll-indicator">
+            <svg xmlns="http://www.w3.org/2000/svg" class="h-8 w-8 text-primary-400 animate-bounce" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 14l-7 7m0 0l-7-7m7 7V3"></path>
+            </svg>
         </div>
     </section>
 
     <!-- About Section -->
-    <section id="about" class="py-20 px-4 max-w-6xl mx-auto">
-        <div class="mb-16 text-center">
-            <h2 class="text-3xl md:text-4xl font-bold mb-4" id="about-title">
-                <span class="neon-text-purple">Cortex</span><span class="neon-text-blue">Lab</span>
-            </h2>
-            <div class="w-24 h-1 bg-gradient-to-r from-blue-500 to-purple-600 mx-auto mb-6"></div>
-            <p class="text-xl text-gray-300 max-w-3xl mx-auto" id="about-text">
-                CortexLab - это инновационная платформа искусственного интеллекта, созданная для автоматизации и оптимизации цифровых процессов. Наши решения помогают бизнесу экономить время и ресурсы, предоставляя интеллектуальные инструменты для работы с контентом, аналитикой и управлением трафиком.
-            </p>
-        </div>
-
-        <div class="grid grid-cols-1 md:grid-cols-3 gap-8">
-            <div class="gradient-bg p-6 rounded-xl neon-border-blue hover:neon-border-purple transition-all duration-300">
-                <div class="text-4xl mb-4 neon-text-blue">
-                    <i class="fas fa-brain"></i>
-                </div>
-                <h3 class="text-xl font-semibold mb-3" id="feature1-title">Мощные алгоритмы</h3>
-                <p class="text-gray-300" id="feature1-text">
-                    Используем передовые модели машинного обучения для решения сложных задач автоматизации.
-                </p>
+    <section id="about" class="py-20 bg-dark-800/50 backdrop-blur-sm">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="text-center mb-16">
+                <h2 class="text-3xl md:text-4xl font-bold mb-4 gradient-text" data-i18n="about.title">О CortexLab</h2>
+                <div class="w-20 h-1 bg-gradient-to-r from-primary-500 to-secondary-500 mx-auto"></div>
             </div>
-
-            <div class="gradient-bg p-6 rounded-xl neon-border-blue hover:neon-border-purple transition-all duration-300">
-                <div class="text-4xl mb-4 neon-text-purple">
-                    <i class="fas fa-bolt"></i>
+            <div class="flex flex-col md:flex-row items-center">
+                <div class="md:w-1/2 mb-10 md:mb-0 md:pr-10">
+                    <div class="relative">
+                        <div class="absolute -top-5 -left-5 w-40 h-40 bg-primary-500 rounded-full filter blur-3xl opacity-10"></div>
+                        <div class="absolute -bottom-5 -right-5 w-40 h-40 bg-secondary-500 rounded-full filter blur-3xl opacity-10"></div>
+                        <div class="relative bg-dark-700 rounded-xl p-8 shadow-xl">
+                            <div class="flex items-center mb-6">
+                                <div class="w-12 h-12 rounded-full bg-gradient-to-r from-primary-500 to-secondary-500 flex items-center justify-center">
+                                    <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6 text-white" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13 10V3L4 14h7v7l9-11h-7z"></path>
+                                    </svg>
+                                </div>
+                                <h3 class="text-xl font-bold ml-4" data-i18n="about.mission">Наша миссия</h3>
+                            </div>
+                            <p class="text-gray-300 mb-6" data-i18n="about.missionText">Мы стремимся революционизировать цифровые рабочие процессы с помощью передовых технологий искусственного интеллекта, предоставляя нашим клиентам конкурентное преимущество.</p>
+                            <div class="flex items-center">
+                                <div class="w-12 h-12 rounded-full bg-gradient-to-r from-primary-500 to-secondary-500 flex items-center justify-center">
+                                    <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6 text-white" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 3v2m6-2v2M9 19v2m6-2v2M5 9H3m2 6H3m18-6h-2m2 6h-2M7 19h10a2 2 0 002-2V7a2 2 0 00-2-2H7a2 2 0 00-2 2v10a2 2 0 002 2zM9 9h6v6H9V9z"></path>
+                                    </svg>
+                                </div>
+                                <h3 class="text-xl font-bold ml-4" data-i18n="about.vision">Наше видение</h3>
+                            </div>
+                            <p class="text-gray-300 mt-6" data-i18n="about.visionText">Стать лидером в области AI-автоматизации, создавая интеллектуальные решения, которые экономят время и ресурсы наших клиентов.</p>
+                        </div>
+                    </div>
                 </div>
-                <h3 class="text-xl font-semibold mb-3" id="feature2-title">Быстрая интеграция</h3>
-                <p class="text-gray-300" id="feature2-text">
-                    Наши решения легко внедряются в существующие рабочие процессы без длительного обучения.
-                </p>
-            </div>
-
-            <div class="gradient-bg p-6 rounded-xl neon-border-blue hover:neon-border-purple transition-all duration-300">
-                <div class="text-4xl mb-4 neon-text-blue">
-                    <i class="fas fa-shield-alt"></i>
+                <div class="md:w-1/2">
+                    <h3 class="text-2xl font-bold mb-6" data-i18n="about.whoWeAre">Кто мы?</h3>
+                    <p class="text-gray-300 mb-6" data-i18n="about.description1">CortexLab - это команда экспертов в области искусственного интеллекта, машинного обучения и автоматизации процессов. Мы разрабатываем интеллектуальные решения, которые помогают бизнесу работать эффективнее.</p>
+                    <p class="text-gray-300 mb-6" data-i18n="about.description2">Наши технологии позволяют автоматизировать рутинные задачи, генерировать качественный контент, анализировать данные и оптимизировать бизнес-процессы с минимальным вмешательством человека.</p>
+                    <div class="grid grid-cols-2 gap-4 mt-8">
+                        <div class="flex items-center">
+                            <div class="w-8 h-8 rounded-full bg-primary-500/20 flex items-center justify-center mr-3">
+                                <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5 text-primary-400" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7"></path>
+                                </svg>
+                            </div>
+                            <span class="text-gray-300" data-i18n="about.feature1">Глубокая экспертиза в AI</span>
+                        </div>
+                        <div class="flex items-center">
+                            <div class="w-8 h-8 rounded-full bg-primary-500/20 flex items-center justify-center mr-3">
+                                <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5 text-primary-400" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7"></path>
+                                </svg>
+                            </div>
+                            <span class="text-gray-300" data-i18n="about.feature2">Индивидуальные решения</span>
+                        </div>
+                        <div class="flex items-center">
+                            <div class="w-8 h-8 rounded-full bg-primary-500/20 flex items-center justify-center mr-3">
+                                <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5 text-primary-400" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7"></path>
+                                </svg>
+                            </div>
+                            <span class="text-gray-300" data-i18n="about.feature3">Поддержка 24/7</span>
+                        </div>
+                        <div class="flex items-center">
+                            <div class="w-8 h-8 rounded-full bg-primary-500/20 flex items-center justify-center mr-3">
+                                <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5 text-primary-400" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7"></path>
+                                </svg>
+                            </div>
+                            <span class="text-gray-300" data-i18n="about.feature4">Гибкие тарифы</span>
+                        </div>
+                    </div>
                 </div>
-                <h3 class="text-xl font-semibold mb-3" id="feature3-title">Безопасность данных</h3>
-                <p class="text-gray-300" id="feature3-text">
-                    Ваши данные защищены с помощью современных криптографических технологий и протоколов.
-                </p>
             </div>
         </div>
     </section>
 
     <!-- Services Section -->
-    <section id="services" class="py-20 px-4 bg-gray-900/50">
-        <div class="max-w-6xl mx-auto">
+    <section id="services" class="py-20 bg-dark-900">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
             <div class="text-center mb-16">
-                <h2 class="text-3xl md:text-4xl font-bold mb-4" id="services-title">
-                    Наши <span class="neon-text-blue">услуги</span>
-                </h2>
-                <div class="w-24 h-1 bg-gradient-to-r from-blue-500 to-purple-600 mx-auto mb-6"></div>
-                <p class="text-xl text-gray-300 max-w-3xl mx-auto" id="services-subtitle">
-                    Полный спектр AI-решений для автоматизации вашего бизнеса
-                </p>
+                <h2 class="text-3xl md:text-4xl font-bold mb-4 gradient-text" data-i18n="services.title">Наши услуги</h2>
+                <div class="w-20 h-1 bg-gradient-to-r from-primary-500 to-secondary-500 mx-auto"></div>
+                <p class="text-gray-400 max-w-2xl mx-auto mt-6" data-i18n="services.subtitle">Мы предлагаем комплексные решения для автоматизации вашего бизнеса с помощью искусственного интеллекта</p>
             </div>
-
             <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
                 <!-- Service 1 -->
-                <div class="service-card gradient-bg p-6 rounded-xl neon-border-blue">
-                    <div class="flex items-center mb-4">
-                        <div class="text-3xl mr-4 neon-text-purple">
-                            <i class="fas fa-share-alt"></i>
-                        </div>
-                        <h3 class="text-xl font-semibold" id="service1-title">Авто-постинг</h3>
+                <div class="service-card rounded-xl p-8 border border-dark-700 hover:border-primary-500/30 transition-all duration-300">
+                    <div class="w-14 h-14 rounded-lg bg-primary-500/10 flex items-center justify-center mb-6">
+                        <svg xmlns="http://www.w3.org/2000/svg" class="h-8 w-8 text-primary-400" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M8 10h.01M12 10h.01M16 10h.01M9 16H5a2 2 0 01-2-2V6a2 2 0 012-2h14a2 2 0 012 2v8a2 2 0 01-2 2h-5l-5 5v-5z"></path>
+                        </svg>
                     </div>
-                    <p class="text-gray-300 mb-4" id="service1-text">
-                        Автоматическая публикация контента в социальных сетях по расписанию с интеллектуальным подбором оптимального времени.
-                    </p>
+                    <h3 class="text-xl font-bold mb-3" data-i18n="services.service1.title">Авто-постинг</h3>
+                    <p class="text-gray-400 mb-4" data-i18n="services.service1.description">Автоматическая публикация контента в социальных сетях по расписанию с интеллектуальным подбором оптимального времени.</p>
                     <div class="flex flex-wrap gap-2">
-                        <span class="px-3 py-1 bg-gray-800 rounded-full text-sm neon-text-blue">Instagram</span>
-                        <span class="px-3 py-1 bg-gray-800 rounded-full text-sm neon-text-blue">Facebook</span>
-                        <span class="px-3 py-1 bg-gray-800 rounded-full text-sm neon-text-blue">Twitter</span>
+                        <span class="px-3 py-1 bg-dark-700 rounded-full text-xs text-primary-400" data-i18n="services.service1.tag1">Instagram</span>
+                        <span class="px-3 py-1 bg-dark-700 rounded-full text-xs text-primary-400" data-i18n="services.service1.tag2">Facebook</span>
+                        <span class="px-3 py-1 bg-dark-700 rounded-full text-xs text-primary-400" data-i18n="services.service1.tag3">Twitter</span>
                     </div>
                 </div>
 
                 <!-- Service 2 -->
-                <div class="service-card gradient-bg p-6 rounded-xl neon-border-purple">
-                    <div class="flex items-center mb-4">
-                        <div class="text-3xl mr-4 neon-text-blue">
-                            <i class="fas fa-pen-fancy"></i>
-                        </div>
-                        <h3 class="text-xl font-semibold" id="service2-title">Генерация контента</h3>
+                <div class="service-card rounded-xl p-8 border border-dark-700 hover:border-primary-500/30 transition-all duration-300">
+                    <div class="w-14 h-14 rounded-lg bg-primary-500/10 flex items-center justify-center mb-6">
+                        <svg xmlns="http://www.w3.org/2000/svg" class="h-8 w-8 text-primary-400" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 20H5a2 2 0 01-2-2V6a2 2 0 012-2h10a2 2 0 012 2v1m2 13a2 2 0 01-2-2V7m2 13a2 2 0 002-2V9a2 2 0 00-2-2h-2m-4-3H9M7 16h6M7 8h6v4H7V8z"></path>
+                        </svg>
                     </div>
-                    <p class="text-gray-300 mb-4" id="service2-text">
-                        Создание уникального текстового, графического и видео контента с помощью искусственного интеллекта.
-                    </p>
+                    <h3 class="text-xl font-bold mb-3" data-i18n="services.service2.title">Генерация контента</h3>
+                    <p class="text-gray-400 mb-4" data-i18n="services.service2.description">Создание уникального текстового, графического и видео контента с помощью нейросетей для вашего бренда.</p>
                     <div class="flex flex-wrap gap-2">
-                        <span class="px-3 py-1 bg-gray-800 rounded-full text-sm neon-text-purple">Статьи</span>
-                        <span class="px-3 py-1 bg-gray-800 rounded-full text-sm neon-text-purple">Посты</span>
-                        <span class="px-3 py-1 bg-gray-800 rounded-full text-sm neon-text-purple">Видео</span>
+                        <span class="px-3 py-1 bg-dark-700 rounded-full text-xs text-primary-400" data-i18n="services.service2.tag1">Статьи</span>
+                        <span class="px-3 py-1 bg-dark-700 rounded-full text-xs text-primary-400" data-i18n="services.service2.tag2">Посты</span>
+                        <span class="px-3 py-1 bg-dark-700 rounded-full text-xs text-primary-400" data-i18n="services.service2.tag3">Видео</span>
                     </div>
                 </div>
 
                 <!-- Service 3 -->
-                <div class="service-card gradient-bg p-6 rounded-xl neon-border-blue">
-                    <div class="flex items-center mb-4">
-                        <div class="text-3xl mr-4 neon-text-purple">
-                            <i class="fas fa-database"></i>
-                        </div>
-                        <h3 class="text-xl font-semibold" id="service3-title">Парсинг данных</h3>
+                <div class="service-card rounded-xl p-8 border border-dark-700 hover:border-primary-500/30 transition-all duration-300">
+                    <div class="w-14 h-14 rounded-lg bg-primary-500/10 flex items-center justify-center mb-6">
+                        <svg xmlns="http://www.w3.org/2000/svg" class="h-8 w-8 text-primary-400" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5H7a2 2 0 00-2 2v12a2 2 0 002 2h10a2 2 0 002-2V7a2 2 0 00-2-2h-2M9 5a2 2 0 002 2h2a2 2 0 002-2M9 5a2 2 0 012-2h2a2 2 0 012 2"></path>
+                        </svg>
                     </div>
-                    <p class="text-gray-300 mb-4" id="service3-text">
-                        Сбор и структурирование данных из различных источников с последующей аналитикой и визуализацией.
-                    </p>
+                    <h3 class="text-xl font-bold mb-3" data-i18n="services.service3.title">Парсинг данных</h3>
+                    <p class="text-gray-400 mb-4" data-i18n="services.service3.description">Сбор и структурирование данных из различных источников для анализа и принятия бизнес-решений.</p>
                     <div class="flex flex-wrap gap-2">
-                        <span class="px-3 py-1 bg-gray-800 rounded-full text-sm neon-text-blue">Web</span>
-                        <span class="px-3 py-1 bg-gray-800 rounded-full text-sm neon-text-blue">API</span>
-                        <span class="px-3 py-1 bg-gray-800 rounded-full text-sm neon-text-blue">Excel</span>
+                        <span class="px-3 py-1 bg-dark-700 rounded-full text-xs text-primary-400" data-i18n="services.service3.tag1">Веб-сайты</span>
+                        <span class="px-3 py-1 bg-dark-700 rounded-full text-xs text-primary-400" data-i18n="services.service3.tag2">Соцсети</span>
+                        <span class="px-3 py-1 bg-dark-700 rounded-full text-xs text-primary-400" data-i18n="services.service3.tag3">Базы данных</span>
                     </div>
                 </div>
 
                 <!-- Service 4 -->
-                <div class="service-card gradient-bg p-6 rounded-xl neon-border-purple">
-                    <div class="flex items-center mb-4">
-                        <div class="text-3xl mr-4 neon-text-blue">
-                            <i class="fas fa-language"></i>
-                        </div>
-                        <h3 class="text-xl font-semibold" id="service4-title">Переводы</h3>
+                <div class="service-card rounded-xl p-8 border border-dark-700 hover:border-primary-500/30 transition-all duration-300">
+                    <div class="w-14 h-14 rounded-lg bg-primary-500/10 flex items-center justify-center mb-6">
+                        <svg xmlns="http://www.w3.org/2000/svg" class="h-8 w-8 text-primary-400" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3 5h12M9 3v2m1.048 9.5A18.022 18.022 0 016.412 9m6.088 9h7M11 21l5-10 5 10M12.751 5C11.783 10.77 8.07 15.61 3 18.129"></path>
+                        </svg>
                     </div>
-                    <p class="text-gray-300 mb-4" id="service4-text">
-                        Высококачественный машинный перевод с сохранением смысла и стиля оригинала для 50+ языков.
-                    </p>
+                    <h3 class="text-xl font-bold mb-3" data-i18n="services.service4.title">Переводы</h3>
+                    <p class="text-gray-400 mb-4" data-i18n="services.service4.description">Высококачественный машинный перевод с сохранением смысла и стиля оригинального текста.</p>
                     <div class="flex flex-wrap gap-2">
-                        <span class="px-3 py-1 bg-gray-800 rounded-full text-sm neon-text-purple">Тексты</span>
-                        <span class="px-3 py-1 bg-gray-800 rounded-full text-sm neon-text-purple">Сайты</span>
-                        <span class="px-3 py-1 bg-gray-800 rounded-full text-sm neon-text-purple">Документы</span>
+                        <span class="px-3 py-1 bg-dark-700 rounded-full text-xs text-primary-400" data-i18n="services.service4.tag1">Тексты</span>
+                        <span class="px-3 py-1 bg-dark-700 rounded-full text-xs text-primary-400" data-i18n="services.service4.tag2">Аудио</span>
+                        <span class="px-3 py-1 bg-dark-700 rounded-full text-xs text-primary-400" data-i18n="services.service4.tag3">Видео</span>
                     </div>
                 </div>
 
                 <!-- Service 5 -->
-                <div class="service-card gradient-bg p-6 rounded-xl neon-border-blue">
-                    <div class="flex items-center mb-4">
-                        <div class="text-3xl mr-4 neon-text-purple">
-                            <i class="fas fa-chart-line"></i>
-                        </div>
-                        <h3 class="text-xl font-semibold" id="service5-title">Отчётность</h3>
+                <div class="service-card rounded-xl p-8 border border-dark-700 hover:border-primary-500/30 transition-all duration-300">
+                    <div class="w-14 h-14 rounded-lg bg-primary-500/10 flex items-center justify-center mb-6">
+                        <svg xmlns="http://www.w3.org/2000/svg" class="h-8 w-8 text-primary-400" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 17v-2m3 2v-4m3 4v-6m2 10H7a2 2 0 01-2-2V5a2 2 0 012-2h5.586a1 1 0 01.707.293l5.414 5.414a1 1 0 01.293.707V19a2 2 0 01-2 2z"></path>
+                        </svg>
                     </div>
-                    <p class="text-gray-300 mb-4" id="service5-text">
-                        Автоматическое формирование аналитических отчётов с прогнозированием и рекомендациями.
-                    </p>
+                    <h3 class="text-xl font-bold mb-3" data-i18n="services.service5.title">Отчётность</h3>
+                    <p class="text-gray-400 mb-4" data-i18n="services.service5.description">Автоматическое формирование аналитических отчётов с визуализацией данных и выводами.</p>
                     <div class="flex flex-wrap gap-2">
-                        <span class="px-3 py-1 bg-gray-800 rounded-full text-sm neon-text-blue">Аналитика</span>
-                        <span class="px-3 py-1 bg-gray-800 rounded-full text-sm neon-text-blue">Дашборды</span>
-                        <span class="px-3 py-1 bg-gray-800 rounded-full text-sm neon-text-blue">Прогнозы</span>
+                        <span class="px-3 py-1 bg-dark-700 rounded-full text-xs text-primary-400" data-i18n="services.service5.tag1">Аналитика</span>
+                        <span class="px-3 py-1 bg-dark-700 rounded-full text-xs text-primary-400" data-i18n="services.service5.tag2">Дашборды</span>
+                        <span class="px-3 py-1 bg-dark-700 rounded-full text-xs text-primary-400" data-i18n="services.service5.tag3">Прогнозы</span>
                     </div>
                 </div>
 
                 <!-- Service 6 -->
-                <div class="service-card gradient-bg p-6 rounded-xl neon-border-purple">
-                    <div class="flex items-center mb-4">
-                        <div class="text-3xl mr-4 neon-text-blue">
-                            <i class="fas fa-traffic-light"></i>
-                        </div>
-                        <h3 class="text-xl font-semibold" id="service6-title">Трафик-менеджмент</h3>
+                <div class="service-card rounded-xl p-8 border border-dark-700 hover:border-primary-500/30 transition-all duration-300">
+                    <div class="w-14 h-14 rounded-lg bg-primary-500/10 flex items-center justify-center mb-6">
+                        <svg xmlns="http://www.w3.org/2000/svg" class="h-8 w-8 text-primary-400" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13 7h8m0 0v8m0-8l-8 8-4-4-6 6"></path>
+                        </svg>
                     </div>
-                    <p class="text-gray-300 mb-4" id="service6-text">
-                        Управление и оптимизация трафика с автоматическим распределением по каналам и источникам.
-                    </p>
+                    <h3 class="text-xl font-bold mb-3" data-i18n="services.service6.title">Трафик-менеджмент</h3>
+                    <p class="text-gray-400 mb-4" data-i18n="services.service6.description">Оптимизация и управление трафиком на ваших цифровых площадках с помощью AI-алгоритмов.</p>
                     <div class="flex flex-wrap gap-2">
-                        <span class="px-3 py-1 bg-gray-800 rounded-full text-sm neon-text-purple">SEO</span>
-                        <span class="px-3 py-1 bg-gray-800 rounded-full text-sm neon-text-purple">PPC</span>
-                        <span class="px-3 py-1 bg-gray-800 rounded-full text-sm neon-text-purple">Соцсети</span>
+                        <span class="px-3 py-1 bg-dark-700 rounded-full text-xs text-primary-400" data-i18n="services.service6.tag1">SEO</span>
+                        <span class="px-3 py-1 bg-dark-700 rounded-full text-xs text-primary-400" data-i18n="services.service6.tag2">Реклама</span>
+                        <span class="px-3 py-1 bg-dark-700 rounded-full text-xs text-primary-400" data-i18n="services.service6.tag3">Конверсия</span>
                     </div>
                 </div>
             </div>
         </div>
     </section>
+        <!-- Cases Section -->
+<section id="cases" class="py-20 bg-dark-900">
+  <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+    <!-- Заголовок -->
+    <div class="text-center mb-16">
+      <h2 class="text-3xl md:text-4xl font-bold mb-4 gradient-text">Наши кейсы</h2>
+      <div class="w-20 h-1 bg-gradient-to-r from-primary-500 to-secondary-500 mx-auto"></div>
+      <p class="text-gray-400 max-w-2xl mx-auto mt-6">
+        Реальные истории автоматизации: от идеи до результата.
+      </p>
+    </div>
+    <!-- Список кейсов -->
+    <div class="grid grid-cols-1 md:grid-cols-2 gap-12">
+      
+      <!-- Кейс 1 -->
+      <div class="bg-dark-800 rounded-xl p-8 border border-dark-700 hover:border-primary-500/30 transition-all duration-300">
+        <h3 class="text-2xl font-semibold mb-4 text-primary-400">Кейс #1: Онлайн-консультант</h3>
+        <p class="text-gray-300 mb-6">
+          ИИ-ассистент для салона красоты: автоматические ответы на вопросы, личные рекомендации и запись на приём.  
+          Результат: +25% продаж и −40% нагрузки на саппорт.
+        </p>
+        <video class="w-full rounded-lg shadow-lg" src="C:\Users\Dmitry\Desktop\сайт\маникюр демо (1).mp4" muted autoplay loop playsinline></video>
+      </div>
+
+      <!-- Кейс 2 -->
+      <div class="bg-dark-800 rounded-xl p-8 border border-dark-700 hover:border-primary-500/30 transition-all duration-300">
+        <h3 class="text-2xl font-semibold mb-4 text-primary-400">Кейс #2: Авто-постинг</h3>
+        <p class="text-gray-300 mb-6">
+          Генерация и публикация контента в соцсетях по расписанию с AI-анализом времени.  
+          Результат: +70% охвата за первый месяц.
+        </p>
+        <video class="w-full rounded-lg shadow-lg" src="C:\Users\Dmitry\Desktop\сайт\posing.mp4.mp4" muted autoplay loop playsinline></video>
+      </div>
+
+      <!-- Кейс 3 -->
+      <div class="bg-dark-800 rounded-xl p-8 border border-dark-700 hover:border-primary-500/30 transition-all duration-300">
+        <h3 class="text-2xl font-semibold mb-4 text-primary-400">Кейс #3: Нейрокомментинг</h3>
+        <p class="text-gray-300 mb-6">
+          Автоматические комментарии в Telegram под постами.  
+          Результат:аудитория +30%.
+        </p>
+        <video class="w-full rounded-lg shadow-lg" src="C:\Users\Dmitry\Desktop\сайт\comment.mp4" muted autoplay loop playsinline></video>
+      </div>
+
+      <!-- Кейс 4 -->
+      <div class="bg-dark-800 rounded-xl p-8 border border-dark-700 hover:border-primary-500/30 transition-all duration-300">
+        <h3 class="text-2xl font-semibold mb-4 text-primary-400">Кейс #4: ИИ консультант</h3>
+        <p class="text-gray-300 mb-6">
+          Интеграция с CRM,работа на основе базы данных,консультация по выбору запчастей и устройств.
+          <br> 
+          Результат: увлечение конверсии на 35%,снижение нагрузки с менеджера.
+        </p>
+        <video class="w-full rounded-lg shadow-lg" src="C:\Users\Dmitry\Desktop\сайт\zar9d.mp4" muted autoplay loop playsinline></video>
+      </div>
+
+      <!-- Кейс 5 -->
+      <div class="bg-dark-800 rounded-xl p-8 border border-dark-700 hover:border-primary-500/30 transition-all duration-300">
+        <h3 class="text-2xl font-semibold mb-4 text-primary-400">Кейс #5: CRM-интеграция</h3>
+        <p class="text-gray-300 mb-6">
+          Подключение ИИ-ассистента к CRM: автоматическая запись клиентов, уведомления и статистика.  
+          Результат: +15% конверсии.
+        </p>
+        <video class="w-full rounded-lg shadow-lg" src="C:\Users\Dmitry\Desktop\сайт\posing.mp4.mp4" muted autoplay loop playsinline></video>
+      </div>
+
+    </div>
+  </div>
+</section>
+
 
     <!-- Clients Section -->
-    <section class="py-20 px-4 max-w-6xl mx-auto">
-        <div class="text-center mb-16">
-            <h2 class="text-3xl md:text-4xl font-bold mb-4" id="clients-title">
-                Кому <span class="neon-text-purple">помогаем</span>
-            </h2>
-            <div class="w-24 h-1 bg-gradient-to-r from-blue-500 to-purple-600 mx-auto mb-6"></div>
-            <p class="text-xl text-gray-300 max-w-3xl mx-auto" id="clients-subtitle">
-                Наши решения идеально подходят для различных сфер бизнеса
-            </p>
-        </div>
-
-        <div class="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-6">
-            <div class="gradient-bg p-6 rounded-xl text-center neon-border-blue hover:neon-border-purple transition-all duration-300">
-                <div class="text-4xl mb-4 neon-text-purple">
-                    <i class="fas fa-user-tie"></i>
-                </div>
-                <h3 class="font-semibold" id="client1-title">Создатели контента</h3>
+    <section id="clients" class="py-20 bg-dark-800/50 backdrop-blur-sm">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="text-center mb-16">
+                <h2 class="text-3xl md:text-4xl font-bold mb-4 gradient-text" data-i18n="clients.title">Кому подойдёт CortexLab</h2>
+                <div class="w-20 h-1 bg-gradient-to-r from-primary-500 to-secondary-500 mx-auto"></div>
+                <p class="text-gray-400 max-w-2xl mx-auto mt-6" data-i18n="clients.subtitle">Наши решения идеально подходят для различных сфер бизнеса и творчества</p>
             </div>
-
-            <div class="gradient-bg p-6 rounded-xl text-center neon-border-purple hover:neon-border-blue transition-all duration-300">
-                <div class="text-4xl mb-4 neon-text-blue">
-                    <i class="fas fa-users"></i>
+            <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6">
+                <!-- Client Type 1 -->
+                <div class="bg-dark-700 rounded-xl p-6 border border-dark-600 hover:border-primary-500/30 transition-all duration-300">
+                    <div class="w-12 h-12 rounded-lg bg-primary-500/10 flex items-center justify-center mb-4">
+                        <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6 text-primary-400" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 10l4.553-2.276A1 1 0 0121 8.618v6.764a1 1 0 01-1.447.894L15 14M5 18h8a2 2 0 002-2V8a2 2 0 00-2-2H5a2 2 0 00-2 2v8a2 2 0 002 2z"></path>
+                        </svg>
+                    </div>
+                    <h3 class="text-lg font-bold mb-2" data-i18n="clients.type1.title">Создатели контента</h3>
+                    <p class="text-gray-400 text-sm" data-i18n="clients.type1.description">Автоматизация публикаций, генерация идей, анализ аудитории.</p>
                 </div>
-                <h3 class="font-semibold" id="client2-title">Инфлюенсеры</h3>
-            </div>
 
-            <div class="gradient-bg p-6 rounded-xl text-center neon-border-blue hover:neon-border-purple transition-all duration-300">
-                <div class="text-4xl mb-4 neon-text-purple">
-                    <i class="fas fa-graduation-cap"></i>
+                <!-- Client Type 2 -->
+                <div class="bg-dark-700 rounded-xl p-6 border border-dark-600 hover:border-primary-500/30 transition-all duration-300">
+                    <div class="w-12 h-12 rounded-lg bg-primary-500/10 flex items-center justify-center mb-4">
+                        <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6 text-primary-400" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M16 7a4 4 0 11-8 0 4 4 0 018 0zM12 14a7 7 0 00-7 7h14a7 7 0 00-7-7z"></path>
+                        </svg>
+                    </div>
+                    <h3 class="text-lg font-bold mb-2" data-i18n="clients.type2.title">Инфлюенсеры</h3>
+                    <p class="text-gray-400 text-sm" data-i18n="clients.type2.description">Управление контентом, анализ эффективности, автоматизация взаимодействия.</p>
                 </div>
-                <h3 class="font-semibold" id="client3-title">Онлайн-школы</h3>
-            </div>
 
-            <div class="gradient-bg p-6 rounded-xl text-center neon-border-purple hover:neon-border-blue transition-all duration-300">
-                <div class="text-4xl mb-4 neon-text-blue">
-                    <i class="fas fa-shopping-cart"></i>
+                <!-- Client Type 3 -->
+                <div class="bg-dark-700 rounded-xl p-6 border border-dark-600 hover:border-primary-500/30 transition-all duration-300">
+                    <div class="w-12 h-12 rounded-lg bg-primary-500/10 flex items-center justify-center mb-4">
+                        <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6 text-primary-400" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 6.253v13m0-13C10.832 5.477 9.246 5 7.5 5S4.168 5.477 3 6.253v13C4.168 18.477 5.754 18 7.5 18s3.332.477 4.5 1.253m0-13C13.168 5.477 14.754 5 16.5 5c1.747 0 3.332.477 4.5 1.253v13C19.832 18.477 18.247 18 16.5 18c-1.746 0-3.332.477-4.5 1.253"></path>
+                        </svg>
+                    </div>
+                    <h3 class="text-lg font-bold mb-2" data-i18n="clients.type3.title">Онлайн-школы</h3>
+                    <p class="text-gray-400 text-sm" data-i18n="clients.type3.description">Автоматизация обучения, генерация материалов, управление студентами.</p>
                 </div>
-                <h3 class="font-semibold" id="client4-title">E-commerce</h3>
-            </div>
 
-            <div class="gradient-bg p-6 rounded-xl text-center neon-border-blue hover:neon-border-purple transition-all duration-300">
-                <div class="text-4xl mb-4 neon-text-purple">
-                    <i class="fas fa-spa"></i>
+                <!-- Client Type 4 -->
+                <div class="bg-dark-700 rounded-xl p-6 border border-dark-600 hover:border-primary-500/30 transition-all duration-300">
+                    <div class="w-12 h-12 rounded-lg bg-primary-500/10 flex items-center justify-center mb-4">
+                        <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6 text-primary-400" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M16 11V7a4 4 0 00-8 0v4M5 9h14l1 12H4L5 9z"></path>
+                        </svg>
+                    </div>
+                    <h3 class="text-lg font-bold mb-2" data-i18n="clients.type4.title">E-commerce</h3>
+                    <p class="text-gray-400 text-sm" data-i18n="clients.type4.description">Управление товарами, автоматизация продаж, персонализация предложений.</p>
                 </div>
-                <h3 class="font-semibold" id="client5-title">Салоны красоты</h3>
-            </div>
 
-            <div class="gradient-bg p-6 rounded-xl text-center neon-border-purple hover:neon-border-blue transition-all duration-300">
-                <div class="text-4xl mb-4 neon-text-blue">
-                    <i class="fas fa-hospital"></i>
+                <!-- Client Type 5 -->
+                <div class="bg-dark-700 rounded-xl p-6 border border-dark-600 hover:border-primary-500/30 transition-all duration-300">
+                    <div class="w-12 h-12 rounded-lg bg-primary-500/10 flex items-center justify-center mb-4">
+                        <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6 text-primary-400" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9.663 17h4.673M12 3v1m6.364 1.636l-.707.707M21 12h-1M4 12H3m3.343-5.657l-.707-.707m2.828 9.9a5 5 0 117.072 0l-.548.547A3.374 3.374 0 0014 18.469V19a2 2 0 11-4 0v-.531c0-.895-.356-1.754-.988-2.386l-.548-.547z"></path>
+                        </svg>
+                    </div>
+                    <h3 class="text-lg font-bold mb-2" data-i18n="clients.type5.title">Салон красоты</h3>
+                    <p class="text-gray-400 text-sm" data-i18n="clients.type5.description">Управление записями, автоматизация напоминаний, анализ клиентов.</p>
                 </div>
-                <h3 class="font-semibold" id="client6-title">Мед. учреждения</h3>
-            </div>
 
-            <div class="gradient-bg p-6 rounded-xl text-center neon-border-blue hover:neon-border-purple transition-all duration-300">
-                <div class="text-4xl mb-4 neon-text-purple">
-                    <i class="fas fa-user-md"></i>
+                <!-- Client Type 6 -->
+                <div class="bg-dark-700 rounded-xl p-6 border border-dark-600 hover:border-primary-500/30 transition-all duration-300">
+                    <div class="w-12 h-12 rounded-lg bg-primary-500/10 flex items-center justify-center mb-4">
+                        <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6 text-primary-400" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19.428 15.428a2 2 0 00-1.022-.547l-2.387-.477a6 6 0 00-3.86.517l-.318.158a6 6 0 01-3.86.517L6.05 15.21a2 2 0 00-1.806.547M8 4h8l-1 1v5.172a2 2 0 00.586 1.414l5 5c1.26 1.26.367 3.414-1.415 3.414H4.828c-1.782 0-2.674-2.154-1.414-3.414l5-5A2 2 0 009 10.172V5L8 4z"></path>
+                        </svg>
+                    </div>
+                    <h3 class="text-lg font-bold mb-2" data-i18n="clients.type6.title">Мед. учреждения</h3>
+                    <p class="text-gray-400 text-sm" data-i18n="clients.type6.description">Управление пациентами, автоматизация записей, анализ данных.</p>
                 </div>
-                <h3 class="font-semibold" id="client7-title">Частные практики</h3>
-            </div>
 
-            <div class="gradient-bg p-6 rounded-xl text-center neon-border-purple hover:neon-border-blue transition-all duration-300">
-                <div class="text-4xl mb-4 neon-text-blue">
-                    <i class="fas fa-briefcase"></i>
+                <!-- Client Type 7 -->
+                <div class="bg-dark-700 rounded-xl p-6 border border-dark-600 hover:border-primary-500/30 transition-all duration-300">
+                    <div class="w-12 h-12 rounded-lg bg-primary-500/10 flex items-center justify-center mb-4">
+                        <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6 text-primary-400" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M21 13.255A23.931 23.931 0 0112 15c-3.183 0-6.22-.62-9-1.745M16 6V4a2 2 0 00-2-2h-4a2 2 0 00-2 2v2m4 6h.01M5 20h14a2 2 0 002-2V8a2 2 0 00-2-2H5a2 2 0 00-2 2v10a2 2 0 002 2z"></path>
+                        </svg>
+                    </div>
+                    <h3 class="text-lg font-bold mb-2" data-i18n="clients.type7.title">Частные практики</h3>
+                    <p class="text-gray-400 text-sm" data-i18n="clients.type7.description">Автоматизация административных задач, управление клиентами.</p>
                 </div>
-                <h3 class="font-semibold" id="client8-title">Стартапы</h3>
+
+                <!-- Client Type 8 -->
+                <div class="bg-dark-700 rounded-xl p-6 border border-dark-600 hover:border-primary-500/30 transition-all duration-300">
+                    <div class="w-12 h-12 rounded-lg bg-primary-500/10 flex items-center justify-center mb-4">
+                        <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6 text-primary-400" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 11H5m14 0a2 2 0 012 2v6a2 2 0 01-2 2H5a2 2 0 01-2-2v-6a2 2 0 012-2m14 0V9a2 2 0 00-2-2M5 11V9a2 2 0 012-2m0 0V5a2 2 0 012-2h6a2 2 0 012 2v2M7 7h10"></path>
+                        </svg>
+                    </div>
+                    <h3 class="text-lg font-bold mb-2" data-i18n="clients.type8.title">Стартапы</h3>
+                    <p class="text-gray-400 text-sm" data-i18n="clients.type8.description">Быстрый запуск процессов, автоматизация рутинных задач, масштабирование.</p>
+                </div>
             </div>
         </div>
     </section>
 
-    <!-- CTA Section -->
-    <section class="py-20 px-4 bg-gradient-to-br from-gray-900 to-gray-800">
-        <div class="max-w-4xl mx-auto text-center">
-            <h2 class="text-3xl md:text-4xl font-bold mb-6" id="cta-title">
-                Готовы автоматизировать ваш бизнес?
-            </h2>
-            <p class="text-xl text-gray-300 mb-10 max-w-3xl mx-auto" id="cta-subtitle">
-                Свяжитесь с нами через наши социальные сети и узнайте, как CortexLab может помочь вашему бизнесу расти быстрее.
-            </p>
-
-            <div class="flex justify-center space-x-6">
-                <a href="https://www.instagram.com/cortexlab.ai/" target="_blank" class="w-14 h-14 rounded-full gradient-bg flex items-center justify-center text-2xl neon-border-blue hover:neon-border-purple transition-all duration-300">
-                    <i class="fab fa-instagram"></i>
-                </a>
-                <a href="https://t.me/CortexLabAI" target="_blank" class="w-14 h-14 rounded-full gradient-bg flex items-center justify-center text-2xl neon-border-purple hover:neon-border-blue transition-all duration-300">
-                    <i class="fab fa-telegram-plane"></i>
-                </a>
+    <!-- Contact Section -->
+    <section id="contact" class="py-20 bg-dark-900">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="text-center mb-16">
+                <h2 class="text-3xl md:text-4xl font-bold mb-4 gradient-text" data-i18n="contact.title">Свяжитесь с нами</h2>
+                <div class="w-20 h-1 bg-gradient-to-r from-primary-500 to-secondary-500 mx-auto"></div>
+                <p class="text-gray-400 max-w-2xl mx-auto mt-6" data-i18n="contact.subtitle">Мы всегда рады новым проектам и сотрудничеству. Следите за нами в соцсетях:</p>
+            </div>
+            <div class="flex flex-col items-center">
+                <div class="flex space-x-6 mb-12">
+                    <a href="https://www.instagram.com/cortexlab.ai/" target="_blank" class="w-14 h-14 rounded-full bg-gradient-to-br from-pink-500 to-purple-600 flex items-center justify-center text-white hover:opacity-90 transition-all duration-300 transform hover:scale-110 shadow-lg">
+                        <i class="fab fa-instagram text-2xl"></i>
+                    </a>
+                    <a href="https://t.me/CortexLabAI" target="_blank" class="w-14 h-14 rounded-full bg-gradient-to-br from-blue-500 to-blue-600 flex items-center justify-center text-white hover:opacity-90 transition-all duration-300 transform hover:scale-110 shadow-lg">
+                        <i class="fab fa-telegram text-2xl"></i>
+                    </a>
+                </div>
+                <div class="text-center">
+                    <p class="text-gray-400 mb-2" data-i18n="contact.email">Email: ekanzz28@gmail.com</p>
+                    <p class="text-gray-400" data-i18n="contact.hours">Работаем 24/7 для вашего удобства</p>
+                </div>
             </div>
         </div>
     </section>
 
     <!-- Footer -->
-    <footer class="py-10 px-4 bg-gray-900/80">
-        <div class="max-w-6xl mx-auto">
+    <footer class="py-8 bg-dark-800 border-t border-dark-700">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
             <div class="flex flex-col md:flex-row justify-between items-center">
-                <div class="mb-6 md:mb-0">
-                    <div class="flex items-center">
-                        <div class="w-10 h-10 rounded-full gradient-bg flex items-center justify-center mr-3">
-                            <span class="text-xl font-bold neon-text-blue">C</span>
-                            <span class="text-xl font-bold neon-text-purple">L</span>
-                        </div>
-                        <span class="text-xl font-bold">CortexLab</span>
+                <div class="flex items-center space-x-2 mb-4 md:mb-0">
+                    <div class="w-8 h-8 rounded-full bg-gradient-to-r from-primary-500 to-secondary-500 flex items-center justify-center">
+                        <img src="pictures/cortexLab (1).png" alt="Описание изображения" class="w-5 h-5">
                     </div>
+                    <span class="text-lg font-bold bg-clip-text text-transparent bg-gradient-to-r from-primary-400 to-secondary-500">CortexLab</span>
                 </div>
-
-                <div class="text-gray-400 text-sm text-center md:text-right">
-                    <p id="copyright">© 2023 CortexLab. Все права защищены.</p>
+                <div class="text-gray-400 text-sm">
+                    <span data-i18n="footer.copyright">© 2025 CortexLab. Все права защищены.</span>
                 </div>
             </div>
         </div>
     </footer>
 
     <script>
-        // Language switching functionality
-        const languageData = {
+        // Mobile menu toggle
+        const mobileMenuButton = document.querySelector('.mobile-menu-button');
+        const mobileMenu = document.querySelector('.mobile-menu');
+
+        mobileMenuButton.addEventListener('click', () => {
+            mobileMenu.classList.toggle('hidden');
+        });
+
+        // Close mobile menu when clicking on a link
+        document.querySelectorAll('.mobile-menu a').forEach(link => {
+            link.addEventListener('click', () => {
+                mobileMenu.classList.add('hidden');
+            });
+        });
+
+        // Language switching
+        const languageToggleRu = document.getElementById('lang-ru');
+        const languageToggleEn = document.getElementById('lang-en');
+
+        // Translations
+        const translations = {
             ru: {
-                heroTitle: '<span class="neon-text-blue">Автоматизация</span> с ИИ для вашего бизнеса',
-                heroSubtitle: 'Оптимизируйте и ускорьте ваши цифровые процессы с помощью наших AI-решений',
-                aboutTitle: '<span class="neon-text-purple">Cortex</span><span class="neon-text-blue">Lab</span>',
-                aboutText: 'CortexLab - это инновационная платформа искусственного интеллекта, созданная для автоматизации и оптимизации цифровых процессов. Наши решения помогают бизнесу экономить время и ресурсы, предоставляя интеллектуальные инструменты для работы с контентом, аналитикой и управлением трафиком.',
-                feature1Title: 'Мощные алгоритмы',
-                feature1Text: 'Используем передовые модели машинного обучения для решения сложных задач автоматизации.',
-                feature2Title: 'Быстрая интеграция',
-                feature2Text: 'Наши решения легко внедряются в существующие рабочие процессы без длительного обучения.',
-                feature3Title: 'Безопасность данных',
-                feature3Text: 'Ваши данные защищены с помощью современных криптографических технологий и протоколов.',
-                servicesTitle: 'Наши <span class="neon-text-blue">услуги</span>',
-                servicesSubtitle: 'Полный спектр AI-решений для автоматизации вашего бизнеса',
-                service1Title: 'Авто-постинг',
-                service1Text: 'Автоматическая публикация контента в социальных сетях по расписанию с интеллектуальным подбором оптимального времени.',
-                service2Title: 'Генерация контента',
-                service2Text: 'Создание уникального текстового, графического и видео контента с помощью искусственного интеллекта.',
-                service3Title: 'Парсинг данных',
-                service3Text: 'Сбор и структурирование данных из различных источников с последующей аналитикой и визуализацией.',
-                service4Title: 'Переводы',
-                service4Text: 'Высококачественный машинный перевод с сохранением смысла и стиля оригинала для 50+ языков.',
-                service5Title: 'Отчётность',
-                service5Text: 'Автоматическое формирование аналитических отчётов с прогнозированием и рекомендациями.',
-                service6Title: 'Трафик-менеджмент',
-                service6Text: 'Управление и оптимизация трафика с автоматическим распределением по каналам и источникам.',
-                clientsTitle: 'Кому <span class="neon-text-purple">помогаем</span>',
-                clientsSubtitle: 'Наши решения идеально подходят для различных сфер бизнеса',
-                client1Title: 'Создатели контента',
-                client2Title: 'Инфлюенсеры',
-                client3Title: 'Онлайн-школы',
-                client4Title: 'E-commerce',
-                client5Title: 'Салоны красоты',
-                client6Title: 'Мед. учреждения',
-                client7Title: 'Частные практики',
-                client8Title: 'Стартапы',
-                ctaTitle: 'Готовы автоматизировать ваш бизнес?',
-                ctaSubtitle: 'Свяжитесь с нами через наши социальные сети и узнайте, как CortexLab может помочь вашему бизнесу расти быстрее.',
-                copyright: '© 2023 CortexLab. Все права защищены.'
+                "nav.about": "О нас",
+                "nav.services": "Услуги",
+                "nav.clients": "Клиенты",
+                "nav.contact": "Контакты",
+                "hero.title": "Автоматизация с ИИ для вашего бизнеса",
+                "hero.subtitle": "Оптимизируйте свои рабочие процессы с помощью наших интеллектуальных решений на базе искусственного интеллекта.",
+                "hero.cta": "Наши услуги",
+                "hero.contact": "Связаться",
+                "about.title": "О CortexLab",
+                "about.mission": "Наша миссия",
+                "about.missionText": "Мы стремимся революционизировать цифровые рабочие процессы с помощью передовых технологий искусственного интеллекта, предоставляя нашим клиентам конкурентное преимущество.",
+                "about.vision": "Наше видение",
+                "about.visionText": "Стать лидером в области AI-автоматизации, создавая интеллектуальные решения, которые экономят время и ресурсы наших клиентов.",
+                "about.whoWeAre": "Кто мы?",
+                "about.description1": "CortexLab - это команда экспертов в области искусственного интеллекта, машинного обучения и автоматизации процессов. Мы разрабатываем интеллектуальные решения, которые помогают бизнесу работать эффективнее.",
+                "about.description2": "Наши технологии позволяют автоматизировать рутинные задачи, генерировать качественный контент, анализировать данные и оптимизировать бизнес-процессы с минимальным вмешательством человека.",
+                "about.feature1": "Глубокая экспертиза в AI",
+                "about.feature2": "Индивидуальные решения",
+                "about.feature3": "Поддержка 24/7",
+                "about.feature4": "Гибкие тарифы",
+                "services.title": "Наши услуги",
+                "services.subtitle": "Мы предлагаем комплексные решения для автоматизации вашего бизнеса с помощью искусственного интеллекта",
+                "services.service1.title": "Авто-постинг",
+                "services.service1.description": "Автоматическая публикация контента в социальных сетях по расписанию с интеллектуальным подбором оптимального времени.",
+                "services.service1.tag1": "Instagram",
+                "services.service1.tag2": "Facebook",
+                "services.service1.tag3": "Twitter",
+                "services.service2.title": "Генерация контента",
+                "services.service2.description": "Создание уникального текстового, графического и видео контента с помощью нейросетей для вашего бренда.",
+                "services.service2.tag1": "Статьи",
+                "services.service2.tag2": "Посты",
+                "services.service2.tag3": "Видео",
+                "services.service3.title": "Парсинг данных",
+                "services.service3.description": "Сбор и структурирование данных из различных источников для анализа и принятия бизнес-решений.",
+                "services.service3.tag1": "Веб-сайты",
+                "services.service3.tag2": "Соцсети",
+                "services.service3.tag3": "Базы данных",
+                "services.service4.title": "Переводы",
+                "services.service4.description": "Высококачественный машинный перевод с сохранением смысла и стиля оригинального текста.",
+                "services.service4.tag1": "Тексты",
+                "services.service4.tag2": "Аудио",
+                "services.service4.tag3": "Видео",
+                "services.service5.title": "Отчётность",
+                "services.service5.description": "Автоматическое формирование аналитических отчётов с визуализацией данных и выводами.",
+                "services.service5.tag1": "Аналитика",
+                "services.service5.tag2": "Дашборды",
+                "services.service5.tag3": "Прогнозы",
+                "services.service6.title": "Трафик-менеджмент",
+                "services.service6.description": "Оптимизация и управление трафиком на ваших цифровых площадках с помощью AI-алгоритмов.",
+                "services.service6.tag1": "SEO",
+                "services.service6.tag2": "Реклама",
+                "services.service6.tag3": "Конверсия",
+                "clients.title": "Наши решения выбирают",
+                "clients.subtitle": "Наши решения идеально подходят для различных сфер бизнеса и творчества",
+                "clients.type1.title": "Создатели контента",
+                "clients.type1.description": "Автоматизация публикаций, генерация идей, анализ аудитории.",
+                "clients.type2.title": "Инфлюенсеры",
+                "clients.type2.description": "Управление контентом, анализ эффективности, автоматизация взаимодействия.",
+                "clients.type3.title": "Онлайн-школы",
+                "clients.type3.description": "Автоматизация обучения, генерация материалов, управление студентами.",
+                "clients.type4.title": "E-commerce",
+                "clients.type4.description": "Управление товарами, автоматизация продаж, персонализация предложений.",
+                "clients.type5.title": "Салон красоты",
+                "clients.type5.description": "Управление записями, автоматизация напоминаний, анализ клиентов.",
+                "clients.type6.title": "Мед. учреждения",
+                "clients.type6.description": "Управление пациентами, автоматизация записей, анализ данных.",
+                "clients.type7.title": "Частные практики",
+                "clients.type7.description": "Автоматизация административных задач, управление клиентами.",
+                "clients.type8.title": "Стартапы",
+                "clients.type8.description": "Быстрый запуск процессов, автоматизация рутинных задач, масштабирование.",
+                "contact.title": "Свяжитесь с нами",
+                "contact.subtitle": "Мы всегда рады новым проектам и сотрудничеству. Следите за нами в соцсетях:",
+                "contact.email": "Email: ekanzz28@gmail.com",
+                "contact.hours": "Работаем 24/7 для вашего удобства",
+                "footer.copyright": "© 2023 CortexLab. Все права защищены."
             },
             en: {
-                heroTitle: 'AI <span class="neon-text-blue">Automation</span> for Your Business',
-                heroSubtitle: 'Optimize and accelerate your digital workflows with our AI solutions',
-                aboutTitle: '<span class="neon-text-purple">Cortex</span><span class="neon-text-blue">Lab</span>',
-                aboutText: 'CortexLab is an innovative artificial intelligence platform designed for automating and optimizing digital processes. Our solutions help businesses save time and resources by providing intelligent tools for content management, analytics, and traffic optimization.',
-                feature1Title: 'Powerful Algorithms',
-                feature1Text: 'We use advanced machine learning models to solve complex automation challenges.',
-                feature2Title: 'Quick Integration',
-                feature2Text: 'Our solutions easily integrate into existing workflows without lengthy training.',
-                feature3Title: 'Data Security',
-                feature3Text: 'Your data is protected with modern cryptographic technologies and protocols.',
-                servicesTitle: 'Our <span class="neon-text-blue">Services</span>',
-                servicesSubtitle: 'Comprehensive AI solutions for business automation',
-                service1Title: 'Auto-Posting',
-                service1Text: 'Automated content publishing on social media with intelligent scheduling for optimal timing.',
-                service2Title: 'Content Generation',
-                service2Text: 'Creation of unique text, graphic, and video content using artificial intelligence.',
-                service3Title: 'Data Parsing',
-                service3Text: 'Collection and structuring of data from various sources with subsequent analytics and visualization.',
-                service4Title: 'Translations',
-                service4Text: 'High-quality machine translation preserving the meaning and style of the original for 50+ languages.',
-                service5Title: 'Reporting',
-                service5Text: 'Automatic generation of analytical reports with forecasting and recommendations.',
-                service6Title: 'Traffic Management',
-                service6Text: 'Optimization and distribution of traffic across channels and sources.',
-                clientsTitle: 'Who We <span class="neon-text-purple">Help</span>',
-                clientsSubtitle: 'Our solutions are perfect for various business sectors',
-                client1Title: 'Content Creators',
-                client2Title: 'Influencers',
-                client3Title: 'Online Schools',
-                client4Title: 'E-commerce',
-                client5Title: 'Beauty Salons',
-                client6Title: 'Medical Facilities',
-                client7Title: 'Private Practices',
-                client8Title: 'Startups',
-                ctaTitle: 'Ready to automate your business?',
-                ctaSubtitle: 'Contact us through our social networks and discover how CortexLab can help your business grow faster.',
-                copyright: '© 2023 CortexLab. All rights reserved.'
-            }
-        };
+                "nav.about": "About",
+                "nav.services": "Services",
+                "nav.clients": "Clients",
+                "nav.contact": "Contact",
+                "hero.title": "AI Automation for Your Business",
+                "hero.subtitle": "Optimize your workflows with our intelligent AI-powered solutions.",
+                "hero.cta": "Our Services",
+                "hero.contact": "Contact Us",
+                "about.title": "About CortexLab",
+                "about.mission": "Our Mission",
+                "about.missionText": "We aim to revolutionize digital workflows with cutting-edge AI technologies, giving our clients a competitive advantage.",
+                "about.vision": "Our Vision",
+                "about.visionText": "To become a leader in AI automation by creating intelligent solutions that save our clients' time and resources.",
+                "about.whoWeAre": "Who We Are?",
+                "about.description1": "CortexLab is a team of experts in artificial intelligence, machine learning and process automation. We develop intelligent solutions that help businesses work more efficiently.",
+                "about.description2": "Our technologies allow automating routine tasks, generating quality content, analyzing data and optimizing business processes with minimal human intervention.",
+                "about.feature1": "Deep AI expertise",
+                "about.feature2": "Custom solutions",
+                "about.feature3": "24/7 support",
+                "about.feature4": "Flexible pricing",
+                "services.title": "Our Services",
+                "services.subtitle": "We offer comprehensive solutions for automating your business with artificial intelligence",
 
-        // Set default language to Russian
-        let currentLanguage = 'ru';
-
-        // Function to update all text elements
-        function updateLanguage(lang) {
-            currentLanguage = lang;
-            const data = languageData[lang];
-
-            // Update all elements with their respective translations
-            document.getElementById('hero-title').innerHTML = data.heroTitle;
-            document.getElementById('hero-subtitle').textContent = data.heroSubtitle;
-            document.getElementById('about-title').innerHTML = data.aboutTitle;
-            document.getElementById('about-text').textContent = data.aboutText;
-            document.getElementById('feature1-title').textContent = data.feature1Title;
-            document.getElementById('feature1-text').textContent = data.feature1Text;
-            document.getElementById('feature2-title').textContent = data.feature2Title;
-            document.getElementById('feature2-text').textContent = data.feature2Text;
-            document.getElementById('feature3-title').textContent = data.feature3Title;
-            document.getElementById('feature3-text').textContent = data.feature3Text;
-            document.getElementById('services-title').innerHTML = data.servicesTitle;
-            document.getElementById('services-subtitle').textContent = data.servicesSubtitle;
-            document.getElementById('service1-title').textContent = data.service1Title;
-            document.getElementById('service1-text').textContent = data.service1Text;
-            document.getElementById('service2-title').textContent = data.service2Title;
-            document.getElementById('service2-text').textContent = data.service2Text;
-            document.getElementById('service3-title').textContent = data.service3Title;
-            document.getElementById('service3-text').textContent = data.service3Text;
-            document.getElementById('service4-title').textContent = data.service4Title;
-            document.getElementById('service4-text').textContent = data.service4Text;
-            document.getElementById('service5-title').textContent = data.service5Title;
-            document.getElementById('service5-text').textContent = data.service5Text;
-            document.getElementById('service6-title').textContent = data.service6Title;
-            document.getElementById('service6-text').textContent = data.service6Text;
-            document.getElementById('clients-title').innerHTML = data.clientsTitle;
-            document.getElementById('clients-subtitle').textContent = data.clientsSubtitle;
-            document.getElementById('client1-title').textContent = data.client1Title;
-            document.getElementById('client2-title').textContent = data.client2Title;
-            document.getElementById('client3-title').textContent = data.client3Title;
-            document.getElementById('client4-title').textContent = data.client4Title;
-            document.getElementById('client5-title').textContent = data.client5Title;
-            document.getElementById('client6-title').textContent = data.client6Title;
-            document.getElementById('client7-title').textContent = data.client7Title;
-            document.getElementById('client8-title').textContent = data.client8Title;
-            document.getElementById('cta-title').innerHTML = data.ctaTitle;
-            document.getElementById('cta-subtitle').textContent = data.ctaSubtitle;
-            document.getElementById('copyright').textContent = data.copyright;
-
-            // Update button styles
-            if (lang === 'ru') {
-                document.getElementById('lang-ru').classList.remove('bg-gray-700');
-                document.getElementById('lang-ru').classList.add('bg-gradient-to-r', 'from-purple-500', 'to-blue-500', 'text-white');
-                document.getElementById('lang-en').classList.remove('bg-gradient-to-r', 'from-purple-500', 'to-blue-500', 'text-white');
-                document.getElementById('lang-en').classList.add('bg-gray-700', 'text-gray-300');
-            } else {
-                document.getElementById('lang-en').classList.remove('bg-gray-700');
-                document.getElementById('lang-en').classList.add('bg-gradient-to-r', 'from-purple-500', 'to-blue-500', 'text-white');
-                document.getElementById('lang-ru').classList.remove('bg-gradient-to-r', 'from-purple-500', 'to-blue-500', 'text-white');
-                document.getElementById('lang-ru').classList.add('bg-gray-700', 'text-gray-300');
-            }
-        }
-
-        // Event listeners for language buttons
-        document.getElementById('lang-ru').addEventListener('click', () => {
-            if (currentLanguage !== 'ru') {
-                updateLanguage('ru');
-            }
-        });
-
-        document.getElementById('lang-en').addEventListener('click', () => {
-            if (currentLanguage !== 'en') {
-                updateLanguage('en');
-            }
-        });
-
-        // Scroll animations
-        document.addEventListener('DOMContentLoaded', () => {
-            const fadeElements = document.querySelectorAll('.fade-in');
-
-            const observer = new IntersectionObserver((entries) => {
-                entries.forEach(entry => {
-                    if (entry.isIntersecting) {
-                        entry.target.classList.add('animate-fadeIn');
-                    }
-                });
-            }, {
-                threshold: 0.1
-            });
-
-            fadeElements.forEach(element => {
-                observer.observe(element);
-            });
-        });
-
-        // Smooth scrolling for anchor links
-        document.querySelectorAll('a[href^="#"]').forEach(anchor => {
-            anchor.addEventListener('click', function(e) {
-                e.preventDefault();
-
-                const targetId = this.getAttribute('href');
-                if (targetId === '#') return;
-
-                const targetElement = document.querySelector(targetId);
-                if (targetElement) {
-                    window.scrollTo({
-                        top: targetElement.offsetTop - 80,
-                        behavior: 'smooth'
-                    });
-                }
-            });
-        });
-    </script>
-</body>
 </html>
